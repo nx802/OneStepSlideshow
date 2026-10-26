@@ -258,7 +258,7 @@ if __name__ == '__main__':
         print('Arg 4 is wrong value. Value = ' + args[4])
         sys.exit()
 
-    answer = input('With Filename? [y/n]: ') if int(args[5]) == 0 else args[5]
+    answer = input('With Filename? [y/n]: ') if args[5] == '0' else args[5]
     if str(answer).lower() == 'n':
         with_filename = False
     else:
