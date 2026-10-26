@@ -1,0 +1,77 @@
+# PersonalAppManager がこのアプリを扱うためのマニフェスト。書式は PersonalAppManager の docs/manifest.md を参照。
+
+[app]
+id      = "one-step-slideshow"
+title   = "OneStepSlideshow"
+summary = "画像を格子状に並べた PowerPoint を作る"
+version = "1.0.0"
+runtime = "python"
+command = "src/slideshow_from_drop.py {aspect} {rows} {cols} {mode} {filename} {images}"
+
+[[input]]
+name       = "images"
+label      = "画像（フォルダ可）"
+kind       = ["file", "folder"]
+extensions = [".png", ".jpg", ".jpeg", ".bmp"]
+count      = "1+"
+ordered    = true
+# 画像には中身の特徴が無いので detect は書かない。
+# 決まった画像フォルダを毎回これで開くなら、そのフォルダに .personalapp（中身: one-step-slideshow）を置く。
+
+[[param]]
+name    = "aspect"
+label   = "縦横比"
+type    = "choice"
+choices = [{ value = "1", label = "16:9" }, { value = "0", label = "4:3" }]
+
+[[param]]
+name    = "rows"
+label   = "行数"
+type    = "int"
+default = 2
+min     = 1
+
+[[param]]
+name    = "cols"
+label   = "列数"
+type    = "int"
+default = 2
+min     = 1
+
+[[param]]
+name    = "mode"
+label   = "はめ方"
+type    = "choice"
+choices = [{ value = "0", label = "fill（切り抜いて埋める）" }, { value = "1", label = "fit（全体を収める）" }]
+
+[[param]]
+name    = "filename"
+label   = "ファイル名を表示する"
+type    = "bool"
+default = true
+values  = { true = "y", false = "n" }
+
+[[entry]]
+id      = "16x9-fill"
+title   = "16:9・fill"
+default = true
+output  = "画像と同じフォルダに slideshow_<日時>.pptx"
+fixed   = { aspect = "1", mode = "0" }
+
+[[entry]]
+id     = "16x9-fit"
+title  = "16:9・fit"
+output = "画像と同じフォルダに slideshow_<日時>.pptx"
+fixed  = { aspect = "1", mode = "1" }
+
+[[entry]]
+id     = "4x3-fill"
+title  = "4:3・fill"
+output = "画像と同じフォルダに slideshow_<日時>.pptx"
+fixed  = { aspect = "0", mode = "0" }
+
+[[entry]]
+id     = "4x3-fit"
+title  = "4:3・fit"
+output = "画像と同じフォルダに slideshow_<日時>.pptx"
+fixed  = { aspect = "0", mode = "1" }
