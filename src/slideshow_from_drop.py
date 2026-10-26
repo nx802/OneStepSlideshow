@@ -194,6 +194,7 @@ def make_slideshow(_img_file_paths: list, _slide_aspect_ratio: float = 4 / 3, _g
     print('Output .pptx file dir = ' + output_dir)
     output_file_name = output_dir + '/slideshow_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.pptx'
     prs.save(output_file_name)
+    print('PAM_OUTPUT: ' + output_file_name)
 
 
 def filepath_list(_paths: list) -> list:
@@ -258,7 +259,7 @@ if __name__ == '__main__':
         print('Arg 4 is wrong value. Value = ' + args[4])
         sys.exit()
 
-    answer = input('With Filename? [y/n]: ') if int(args[5]) == 0 else args[5]
+    answer = input('With Filename? [y/n]: ') if args[5] == '0' else args[5]
     if str(answer).lower() == 'n':
         with_filename = False
     else:
