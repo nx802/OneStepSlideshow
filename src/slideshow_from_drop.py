@@ -194,6 +194,7 @@ def make_slideshow(_img_file_paths: list, _slide_aspect_ratio: float = 4 / 3, _g
     print('Output .pptx file dir = ' + output_dir)
     output_file_name = output_dir + '/slideshow_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.pptx'
     prs.save(output_file_name)
+    print('PAM_OUTPUT: ' + output_file_name)
 
 
 def filepath_list(_paths: list) -> list:
